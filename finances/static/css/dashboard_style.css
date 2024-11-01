@@ -1,0 +1,252 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-container {
+    display: grid; /* Use grid layout */
+    grid-template-columns: 1fr 300px; /* Content on the left, filter on the right */
+    gap: 20px; /* Space between columns */
+    padding: 20px; /* Padding around the dashboard */
+}
+
+/* Filter card styles */
+.filter-card {
+    background-color: #ffffff; /* White background */
+    padding: 20px; /* Padding inside the card */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.filter-card h2 {
+    margin: 0 0 10px; /* Margin for title */
+    font-size: 20px; /* Font size for the title */
+    color: #333; /* Dark text color */
+}
+
+/* Filter container styles */
+.filter-container {
+    padding: 20px; /* Padding inside the form */
+}
+
+/* Filter form styles */
+.filter-form label {
+    display: block; /* Make labels block elements */
+    margin: 10px 0 5px; /* Margin for spacing */
+    font-weight: bold; /* Bold font for labels */
+    color: #333; /* Dark text color */
+    font-size: 1.1em; /* Slightly larger font size */
+}
+
+.styled-select {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding for better spacing */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    transition: border 0.3s, background 0.3s; /* Smooth border and background transition */
+    margin-bottom: 15px; /* Space below select */
+    font-size: 1em; /* Consistent font size */
+}
+
+.styled-button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text color */
+    padding: 12px; /* Padding inside the button */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth background color and transform transition */
+    width: 100%; /* Full width for button */
+    font-size: 1.1em; /* Larger font size for button */
+}
+
+/* Card container styles */
+.card-container {
+    display: flex; /* Flex layout to center cards */
+    gap: 20px; /* Space between individual cards */
+    justify-content: center; /* Center the card container horizontally */
+    margin-bottom: 30px; /* Space below the card container */
+    flex-wrap: wrap; /* Wrap cards on smaller screens */
+}
+
+/* General card styling */
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #666;
+}
+
+.card .amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Specific card colors */
+.card-income {
+    background-color: #d9edf7; /* Light blue */
+    color: #31708f;
+}
+
+.card-expenses {
+    background-color: #f2dede; /* Light red */
+    color: #a94442;
+}
+
+.card-balance {
+    background-color: #dff0d8; /* Light green */
+    color: #3c763d;
+}
+
+
+/* Centering and styling the transaction list */
+.transaction-list {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-date {
+    font-weight: bold;
+    color: #555;
+}
+
+.transaction-category {
+    flex: 1;
+    text-align: left;
+    margin-left: 1rem;
+    color: #333;
+}
+
+.transaction-amount {
+    font-weight: bold;
+    margin-right: 1rem; /* Add space to the right of amount */
+}
+
+.amount-income {
+    color: #28a745;
+}
+
+.amount-expense {
+    color: #dc3545;
+}
+
+    /* Styling for the edit and other buttons in the transaction list */
+.transaction-edit .btn {
+        margin: 15px;  /* Adds space between buttons */
+        background-color: #ffc107;
+        border: none;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        color: #333;
+        cursor: pointer;
+        text-decoration: none;
+}
+btn:hover {
+    background-color: #e0a800;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+/* Center container for the Add Transaction button */
+.center-button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-top: 20px; /* Space above button */
+}
+
+/* Add Transaction button styling */
+.btn {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff; /* Primary blue */
+    padding: 12px 24px; /* Button padding */
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+/* Button hover and active states */
+.btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+.btn:active {
+    transform: translateY(0); /* Reset on click */
+}
+
+
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr; /* Stack filter and content on small screens */
+    }
+
+    .filter-container {
+        width: 90%; /* Full width on smaller screens */
+        margin: 0 auto; /* Center on the page */
+    }
+    .transaction-list {
+        margin-top: 20px; /* Less margin for smaller screens */
+        padding: 15px; /* Slightly smaller padding */
+    }
+    .card-container {
+        gap: 15px; /* Adjust gap for smaller screens */
+        margin-bottom: 20px;
+    }
+
+    .card {
+        width: 100%; /* Full width on small screens */
+        max-width: 250px; /* Optional maximum width */
+        margin: 0 auto; /* Center each card */
+    }
+    .center-button-container {
+        margin-top: 15px; /* Reduce top margin for small screens */
+    }
+    .btn {
+        padding: 10px 20px; /* Slightly smaller button on small screens */
+        font-size: 1em;
+    }
+}

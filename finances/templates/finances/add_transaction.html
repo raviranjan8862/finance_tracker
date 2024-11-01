@@ -1,0 +1,24 @@
+<!-- finances/templates/finances/add_transaction.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/add_transaction.css' %}">
+
+    <title>Add Transaction</title>
+    
+</head>
+<body>
+    
+    <div class="container">
+        <h2>Add New Transaction</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Save Transaction</button>
+        </form>
+    </div>
+</body>
+</html>
