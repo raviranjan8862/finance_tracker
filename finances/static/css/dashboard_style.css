@@ -16,42 +16,95 @@ body {
 }
 
 /* Filter card styles */
-.filter-card {
+.filter-container {
+    position: relative; /* Positioning for absolute child elements */
+}
+
+.filter-icon {
+    cursor: pointer; /* Change cursor on hover */
+    display: flex; /* Align icon and text */
+    align-items: center; /* Center items vertically */
+    padding: 10px; /* Padding around the icon */
+    background-color: #ffffff; /* Background color */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.filter-icon i {
+    margin-right: 5px; /* Space between icon and text */
+    color: #333; /* Icon color */
+}
+
+/* Styles for the filter form */
+/* Styles for the filter form container */
+.filter-form {
+    position: absolute; /* Position the form absolutely */
+    top: 50px; /* Adjust based on your layout */
+    left: 0; /* Align to the left */
     background-color: #ffffff; /* White background */
-    padding: 20px; /* Padding inside the card */
+    padding: 20px; /* Padding inside the form */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    z-index: 1000; /* Ensure it appears above other elements */
+    width: 300px; /* Fixed width for consistency */
+    display: none; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
 }
 
-.filter-card h2 {
-    margin: 0 0 10px; /* Margin for title */
-    font-size: 20px; /* Font size for the title */
-    color: #333; /* Dark text color */
-}
-
-/* Filter container styles */
-.filter-container {
-    padding: 20px; /* Padding inside the form */
-}
-
-/* Filter form styles */
+/* Style the labels */
 .filter-form label {
     display: block; /* Make labels block elements */
-    margin: 10px 0 5px; /* Margin for spacing */
+    margin-bottom: 5px; /* Space below labels */
     font-weight: bold; /* Bold font for labels */
     color: #333; /* Dark text color */
     font-size: 1.1em; /* Slightly larger font size */
 }
 
+/* Style the select elements */
 .styled-select {
     width: 100%; /* Full width */
     padding: 10px; /* Padding for better spacing */
     border: 1px solid #ccc; /* Light border */
     border-radius: 4px; /* Rounded corners */
-    transition: border 0.3s, background 0.3s; /* Smooth border and background transition */
+    transition: border 0.3s, background 0.3s; /* Smooth border transition */
     margin-bottom: 15px; /* Space below select */
     font-size: 1em; /* Consistent font size */
 }
+
+/* Style the filter button */
+.btn-filter {
+    background-color: #007bff; /* Primary button color */
+    color: white; /* Text color */
+    padding: 10px 15px; /* Padding for button */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background color transition */
+    display: block; /* Full width button */
+    width: 100%; /* Full width for button */
+}
+
+/* Button hover effect */
+.btn-filter:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Optional: Close button style (if you want to add a close button) */
+.close-button {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #dc3545; /* Red color for close button */
+    cursor: pointer; /* Pointer cursor */
+    transition: color 0.3s; /* Smooth transition for color */
+}
+
+/* Close button hover effect */
+.close-button:hover {
+    color: #c82333; /* Darker red on hover */
+}
+
+
 
 
 
@@ -191,6 +244,10 @@ body {
 }
 .btn-warning {
     background-color: #ffc107; /* Yellow */
+}
+.btn-history{
+    background-color:#b06500;
+    margin-left:15px;
 }
 
 .btn-warning:hover {

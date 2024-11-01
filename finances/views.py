@@ -115,3 +115,27 @@ def delete_transaction(request, id):
     
     # Redirect to the main dashboard or transactions list page
     return redirect('dashboard')  # Replace 'dashboard' with your desired redirect path
+
+def transaction_history(request):
+    transactions = Transaction.objects.filter(user_id=1)  # Adjust to filter based on the logged-in user
+    current_month = int(request.GET.get('month', datetime.now().month))
+    current_year = int(request.GET.get('year', datetime.now().year))
+        # Filter transactions based on the selected month and year
+    transactions = Transaction.objects.filter(
+        user=request.user,
+        date__year=current_year,
+        date__month=current_month
+    ).order_by('-date')
+
+    month_names = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
+    context = {
+        'transactions': transactions,
+        'month_names': month_names, 
+        'current_month': current_month,
+        'current_month_name': month_names[current_month - 1],
+        'current_year': current_year,
+    }
+    return render(request, 'finances/transaction_history.html', context)
