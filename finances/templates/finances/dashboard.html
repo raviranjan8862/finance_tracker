@@ -42,17 +42,13 @@
                 </div>
             </div>
               <!-- Add Transaction Button Centered Below Transaction List -->
-              <div class="center-button-container">
+              <div class="add_transaction">
                 <a href="{% url 'add_transaction' %}" class="btn btn-primary">Add Transaction</a>
             </div>
             
             <div class="transaction-list">
-                <!-- your_template.html -->
-                <!-- your_template.html -->
                 <h2>Transactions for {{ current_month_name }} {{ current_year }}</h2>
 
-
-            
                 {% for transaction in transactions %}
                 <div class="transaction-item">
                     <div class="transaction-date">
@@ -73,10 +69,6 @@
                 <p>No transactions found for this month.</p>
                 {% endfor %}
             </div>
-            
-            
-
-       
             
         </div>
 
@@ -103,7 +95,7 @@
                             {% endfor %}
                         </select>
     
-                        <button type="submit" class="styled-button">Filter</button>
+                        <button type="submit" class="filter-button">Filter</button>
                     </form>
                 </div>
             </div>

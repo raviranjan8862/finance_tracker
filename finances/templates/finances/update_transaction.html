@@ -6,18 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/add_transaction.css' %}">
 
-    <title>Add Transaction</title>
+    <title>Update Transaction</title>
     
 </head>
 <body>
-    
-    <h2>Update Transaction</h2>
 
-    <form method="post">
+    <div class="container">
+       <h2>Update Transaction</h2>
+
+       <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+       </form>
+</div>
 </body>
 </html>

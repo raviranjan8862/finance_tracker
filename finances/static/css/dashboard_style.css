@@ -53,17 +53,7 @@ body {
     font-size: 1em; /* Consistent font size */
 }
 
-.styled-button {
-    background-color: #007bff; /* Blue background */
-    color: white; /* White text color */
-    padding: 12px; /* Padding inside the button */
-    border: none; /* Remove border */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Pointer on hover */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth background color and transform transition */
-    width: 100%; /* Full width for button */
-    font-size: 1.1em; /* Larger font size for button */
-}
+
 
 /* Card container styles */
 .card-container {
@@ -109,7 +99,13 @@ body {
 
 .card-balance {
     background-color: #dff0d8; /* Light green */
-    color: #3c763d;
+    color: #3c763d;body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 
@@ -157,67 +153,56 @@ body {
 .amount-expense {
     color: #dc3545;
 }
-
-    /* Styling for the edit and other buttons in the transaction list */
-.transaction-edit .btn {
-        margin: 15px;  /* Adds space between buttons */
-        background-color: #ffc107;
-        border: none;
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        color: #333;
-        cursor: pointer;
-        text-decoration: none;
+.filter-button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text color */
+    padding: 12px; /* Padding inside the button */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth background color and transform transition */
+    width: 100%; /* Full width for button */
+    font-size: 1.1em; /* Larger font size for button */
 }
-btn:hover {
-    background-color: #e0a800;
-}
-
-.btn-warning {
-    background-color: #ffc107;
-    border: none;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    color: #333;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.btn-warning:hover {
-    background-color: #e0a800;
+.btn {
+    display: inline-block; /* Ensure the button behaves like a block for spacing */
+    padding: 10px 15px; /* Adjust padding for better size */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    color: white; /* Text color */
+    font-weight: bold; /* Bold text for buttons */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline from links */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
 }
 /* Center container for the Add Transaction button */
-.center-button-container {
+.add_transaction {
     display: flex;
     justify-content: center; /* Center horizontally */
     margin-top: 20px; /* Space above button */
 }
 
-/* Add Transaction button styling */
-.btn {
-    text-decoration: none;
-    color: white;
-    background-color: #007bff; /* Primary blue */
-    padding: 12px 24px; /* Button padding */
-    border-radius: 5px;
-    font-size: 1.1em;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+.btn-primary{
+    background-color:#0455bf;
+}
+.btn-primary:hover {
+    background-color: #6f9cde;
+}
+.btn-warning {
+    background-color: #ffc107; /* Yellow */
 }
 
-/* Button hover and active states */
-.btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+.btn-warning:hover {
+    background-color: #e0a800; /* Dark yellow on hover */
 }
-.btn:active {
-    transform: translateY(0); /* Reset on click */
+.btn-danger {
+    background-color: #dc3545; /* Red */
 }
 
-
-
-
+.btn-danger:hover {
+    background-color: #c82333; 
+}
 /* Responsive design */
 @media (max-width: 768px) {
     .dashboard-container {
@@ -242,11 +227,8 @@ btn:hover {
         max-width: 250px; /* Optional maximum width */
         margin: 0 auto; /* Center each card */
     }
-    .center-button-container {
+    .add_transaction {
         margin-top: 15px; /* Reduce top margin for small screens */
     }
-    .btn {
-        padding: 10px 20px; /* Slightly smaller button on small screens */
-        font-size: 1em;
-    }
+  
 }
