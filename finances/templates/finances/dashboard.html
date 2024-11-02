@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finance Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <link rel="stylesheet" href="{% static 'css/dashboard_style.css' %}">
 </head>
 <body>
@@ -24,12 +23,18 @@
                     <h3>Monthly Expenses</h3>
                     <div class="amount">${{ monthly_expenses }}</div>
                 </div>
-                <div class="card card-balance">
-                    <h3>Monthly Balance</h3>
-                    <div class="amount">${{ monthly_balance }}</div>
+                <div class="card card-savings-goal">
+                    <h3>Monthly Saving Goal</h3>
+                    <div class="amount">${{ saving_goal.monthly_goal }}</div>
+                </div>
+                <div class="card monthlys-saving">
+                    <h3>Monthly Saving</h3>
+                    <div class="amount {% if monthly_balance < saving_goal.monthly_goal %}amount-warning{% else %}amount-success{% endif %}">
+                        ${{ monthly_balance }}
+                    </div>
                 </div>
             </div>
-    
+            
             <div class="card-container">
                 <div class="card card-income">
                     <h3>Yearly Income</h3>
@@ -39,22 +44,26 @@
                     <h3>Yearly Expenses</h3>
                     <div class="amount">${{ yearly_expenses }}</div>
                 </div>
-                <div class="card card-balance">
-                    <h3>Yearly Balance</h3>
-                    <div class="amount">${{ yearly_balance }}</div>
+                <div class="card card-savings-goal">
+                    <h3>Yearly Saving Goal</h3>
+                    <div class="amount">${{ saving_goal.yearly_goal }}</div>
+                </div>
+                <div class="card yearly-saving">
+                    <h3>Yearly Saving</h3>
+                    <div class="amount {% if yearly_balance < saving_goal.yearly_goal %}amount-warning{% else %}amount-success{% endif %}">
+                        ${{ yearly_balance }}
+                    </div>
                 </div>
             </div>
-              <!-- Add Transaction Button section -->
-              <div class="add_transaction">
+            
+
+
+            <!-- Add Transaction Button section -->
+            <div class="add_transaction">
                 <a href="{% url 'add_transaction' %}" class="btn btn-primary">Add Transaction</a>
                 <a href="{% url 'transaction_history' %}" class="btn btn-history">Transaction History</a>
             </div>
-            
-
-            
         </div>
-
-
     
         <!-- Filter section -->
         <div class="filter-container">
@@ -85,9 +94,8 @@
                 </form>
             </div>
         </div>
-        
-        
     </div>
+
     <script>
         document.querySelector('.filter-icon').addEventListener('click', function() {
             const filterForm = document.querySelector('.filter-form');
@@ -98,7 +106,5 @@
             document.querySelector('.filter-form').style.display = 'none';
         });
     </script>
-    
-    
 </body>
 </html>

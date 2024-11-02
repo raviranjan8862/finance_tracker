@@ -5,15 +5,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import models
 from datetime import datetime
-from .models import Transaction, SavingsGoal
-from .forms import TransactionForm, SavingsGoalForm
+from decimal import Decimal
+from .models import Transaction, SavingGoal
+from .forms import TransactionForm, SavingGoalForm
+
+# finances/views.py
 
 @login_required
 def dashboard(request):
     # Get the current month and year, or use the selected ones
     current_month = int(request.GET.get('month', datetime.now().month))
     current_year = int(request.GET.get('year', datetime.now().year))
-
 
     # Filter transactions based on the selected month and year
     transactions = Transaction.objects.filter(
@@ -36,7 +38,17 @@ def dashboard(request):
     yearly_expenses = yearly_transactions.filter(transaction_type='expense').aggregate(models.Sum('amount'))['amount__sum'] or 0
     yearly_balance = yearly_income - yearly_expenses
 
-    goals = SavingsGoal.objects.filter(user=request.user)
+    # Retrieve or create a saving goal for the user
+    saving_goal, created = SavingGoal.objects.get_or_create(user=request.user, defaults={
+        'yearly_goal': Decimal('0.00'),
+        'monthly_goal': Decimal('0.00'),
+        'current_saving': Decimal('0.00')
+    })
+
+    # Calculate remaining balance to be added to savings
+    if monthly_balance > 0:
+        saving_goal.current_saving += monthly_balance
+        saving_goal.save()  # Update the saving goal with the new savings
 
     month_names = [
         "January", "February", "March", "April", "May", "June",
@@ -51,13 +63,14 @@ def dashboard(request):
         'yearly_income': yearly_income,
         'yearly_expenses': yearly_expenses,
         'yearly_balance': yearly_balance,
-        'goals': goals,
+        'saving_goal': saving_goal,
         'month_names': month_names, 
         'current_month': current_month,
         'current_month_name': month_names[current_month - 1],
         'current_year': current_year,
     }
     return render(request, 'finances/dashboard.html', context)
+
 
 
 
@@ -139,3 +152,22 @@ def transaction_history(request):
         'current_year': current_year,
     }
     return render(request, 'finances/transaction_history.html', context)
+
+def set_saving_goal(request):
+    if request.method == 'POST':
+        form = SavingGoalForm(request.POST)
+        if form.is_valid():
+            yearly_goal = form.cleaned_data['yearly_goal']
+            monthly_goal = Decimal(yearly_goal) / 12
+            SavingGoal.objects.create(
+                yearly_goal=yearly_goal,
+                monthly_goal=monthly_goal,
+                user=request.user
+            )
+            return redirect('dashboard')  # Redirect to dashboard or another relevant page
+    else:
+        form = SavingGoalForm()
+    return render(request, 'finances/set_saving_goal.html', {'form': form})
+
+
+

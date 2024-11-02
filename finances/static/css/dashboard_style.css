@@ -136,7 +136,7 @@ body {
 .card .amount {
     font-size: 24px;
     font-weight: bold;
-    color: #333;
+    
 }
 
 /* Specific card colors */
@@ -160,6 +160,37 @@ body {
         padding: 0;
     }
 }
+/* Savings card */
+.card-savings-goal {
+    background-color: #e3e7fd; /* Light purple for savings */
+    color: #4a4aad; /* Darker purple for text */
+}
+
+/* Add Savings card styles in the card container */
+.card-savings-goal h3 {
+    color: #4a4aad; /* Heading color for savings card */
+}
+
+
+
+/* Optional hover effect for the savings card */
+.card-savings:hover {
+    background-color: #d1d5f8; /* Slightly darker purple on hover */
+    transition: background-color 0.3s ease;
+}
+.amount-warning {
+    font-size: 24px;
+    font-weight: bold;
+    color: #a94442; /* Dark red for when saving is less than the goal */
+}
+
+.amount-success {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3c763d; /* Dark green for when saving meets or exceeds the goal */
+}
+
+
 
 
 /* Centering and styling the transaction list */

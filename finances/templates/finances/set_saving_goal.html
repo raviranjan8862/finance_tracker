@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- set_saving_goal.html -->
+     <h2>Set Your Yearly Saving Goal</h2>
+     <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- This renders the form fields nicely -->
+        <button type="submit">Set Saving Goal</button>
+    </form>
+
+    
+</body>
+</html>

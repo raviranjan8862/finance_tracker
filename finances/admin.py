@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Category, Transaction, SavingsGoal
+from .models import Category, Transaction, SavingGoal
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -17,10 +17,13 @@ class TransactionAdmin(admin.ModelAdmin):
     list_filter = ('transaction_type', 'category', 'date', 'user')
     ordering = ('-date',)  # Orders by date in descending order
 
-@admin.register(SavingsGoal)
-class SavingsGoalAdmin(admin.ModelAdmin):
-    list_display = ('name', 'current_amount', 'target_amount', 'deadline', 'user')
-    search_fields = ('name', 'user__username')
-    list_filter = ('deadline', 'user')
-    ordering = ('deadline',)  # Orders by deadline in ascending order
+
+
+class SavingGoalAdmin(admin.ModelAdmin):
+    list_display = ('user', 'yearly_goal', 'monthly_goal', 'current_saving', 'created_at')
+    search_fields = ('user__username',)  # Allows searching by the username
+    list_filter = ('created_at',)  # Allows filtering by creation date
+    readonly_fields = ('monthly_goal', 'current_saving')  # Make monthly_goal and current_saving read-only
+
+admin.site.register(SavingGoal, SavingGoalAdmin)
 
