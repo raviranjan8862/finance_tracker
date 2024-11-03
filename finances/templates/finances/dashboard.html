@@ -64,8 +64,14 @@
                 <a href="{% url 'transaction_history' %}" class="btn btn-history">Transaction History</a>
             </div>
         </div>
+        <!-- log out button  -->
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
     
         <!-- Filter section -->
+      
         <div class="filter-container">
             <div class="filter-icon">
                 <i class="fas fa-filter"></i> <!-- Font Awesome filter icon -->

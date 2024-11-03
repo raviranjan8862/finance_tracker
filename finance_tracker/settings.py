@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'finances',
+    'authapp',
     'django_seed'
 ]
 
@@ -127,3 +128,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# settings.py
+LOGIN_URL = 'login'  # URL to the login page
+LOGIN_REDIRECT_URL = 'dashboard'  # Redirect to dashboard after login
+

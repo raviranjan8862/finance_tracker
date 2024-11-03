@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Finance Tracker{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="{% static 'images/profile.jpg' %}" alt="Profile Picture" class="profile-pic">
+                <h2 class="username">John Doe</h2>
+            </div>
+            <nav class="nav">
+                <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+                <a href="{% url 'transaction_history' %}" class="nav-link">Transactions</a>
+                <a href="{% url 'categories' %}" class="nav-link">Categories</a>
+                <a href="{% url 'reports' %}" class="nav-link">Reports</a>
+                <a href="{% url 'goals' %}" class="nav-link">Goals</a>
+            </nav>
+            <div class="overview">
+                <p>Budget: <span class="budget">$3000 / $5000</span></p>
+                <p>Savings Goal: <span class="savings">$200 / $1000</span></p>
+            </div>
+            <div class="theme-toggle">
+                <label for="theme-switch">Dark Mode</label>
+                <input type="checkbox" id="theme-switch">
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Finance Tracker</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search transactions...">
+                </div>
+                <div class="profile-menu">
+                    <img src="{% static 'images/profile.jpg' %}" alt="Profile" class="profile-icon">
+                    <div class="dropdown">
+                        <a href="{% url 'profile' %}">Profile</a>
+                        <a href="{% url 'settings' %}">Settings</a>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dynamic Content Block -->
+            <div class="dashboard-container">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.querySelector('.filter-icon').addEventListener('click', function() {
+            const filterForm = document.querySelector('.filter-form');
+            filterForm.style.display = (filterForm.style.display === 'none' || filterForm.style.display === '') ? 'block' : 'none';
+        });
+    
+        document.querySelector('.close-button').addEventListener('click', function() {
+            document.querySelector('.filter-form').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
