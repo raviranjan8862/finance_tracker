@@ -27,11 +27,14 @@ class Transaction(models.Model):
         return f"{self.transaction_type.capitalize()} - ${self.amount} on {self.date}"
 
 
+# models.py
+from django.db import models
+from django.contrib.auth.models import User
+
 class SavingGoal(models.Model):
     yearly_goal = models.DecimalField(max_digits=10, decimal_places=2)
     monthly_goal = models.DecimalField(max_digits=10, decimal_places=2)
     current_saving = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-
 

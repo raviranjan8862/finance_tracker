@@ -169,5 +169,22 @@ def set_saving_goal(request):
         form = SavingGoalForm()
     return render(request, 'finances/set_saving_goal.html', {'form': form})
 
+@login_required
+def edit_saving_goal(request):
+    # Get the user's saving goal or create a new one if it doesn't exist
+    saving_goal = SavingGoal.objects.filter(user=request.user).first()
+    
+    # If no saving goal exists, create one (optional)
+    if not saving_goal:
+        saving_goal = SavingGoal(user=request.user, yearly_goal=0, monthly_goal=0)
 
+    if request.method == 'POST':
+        form = SavingGoalForm(request.POST, instance=saving_goal)
+        if form.is_valid():
+            form.save()  # Save the updated saving goal
+            messages.success(request, 'Saving goal updated successfully.')
+            return redirect('dashboard')  # Redirect to the dashboard after saving
+    else:
+        form = SavingGoalForm(instance=saving_goal)  # Load the form with the current saving goal
 
+    return render(request, 'finances/edit_saving_goal.html', {'form': form})

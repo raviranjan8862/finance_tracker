@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{% static 'css/dashboard_style.css' %}">
 </head>
 <body>
+
+    <!-- Navbar Section -->
+    {% include 'finances/navbar.html' %}
+
     <div class="dashboard-container">
         <div class="content"> <!-- Main content on the left -->
             <!-- Cards section -->
@@ -27,7 +31,7 @@
                     <h3>Monthly Saving Goal</h3>
                     <div class="amount">${{ saving_goal.monthly_goal }}</div>
                 </div>
-                <div class="card monthlys-saving">
+                <div class="card monthly-saving">
                     <h3>Monthly Saving</h3>
                     <div class="amount {% if monthly_balance < saving_goal.monthly_goal %}amount-warning{% else %}amount-success{% endif %}">
                         ${{ monthly_balance }}
@@ -55,30 +59,35 @@
                     </div>
                 </div>
             </div>
-            
-
 
             <!-- Add Transaction Button section -->
             <div class="add_transaction">
                 <a href="{% url 'add_transaction' %}" class="btn btn-primary">Add Transaction</a>
                 <a href="{% url 'transaction_history' %}" class="btn btn-history">Transaction History</a>
+                {% if saving_goal %}
+                <!-- If the saving goal exists, show the Edit Saving Goal button -->
+                   <a href="{% url 'edit_saving_goal' %}" class="btn btn-warning">Edit Saving Goal</a>
+                {% else %}
+                <!-- If the saving goal does not exist, show the Set Saving Goal button -->
+                   <a href="{% url 'set_saving_goal' %}" class="btn btn-warning">Set Saving Goal</a>
+                {% endif %}
+                
             </div>
+            
+     
+
+
+
         </div>
-        <!-- log out button  -->
-        <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
     
-        <!-- Filter section -->
-      
+        <!-- Filter Section -->
         <div class="filter-container">
             <div class="filter-icon">
-                <i class="fas fa-filter"></i> <!-- Font Awesome filter icon -->
+                <i class="fas fa-filter"></i>
                 <span>Filter</span>
             </div>
-            <div class="filter-form" style="display: none;"> <!-- Hidden by default -->
-                <span class="close-button">&times;</span> <!-- Optional close button -->
+            <div class="filter-form" style="display: none;">
+                <span class="close-button">&times;</span>
                 <form method="get" action="{% url 'dashboard' %}">
                     <label for="month">Select Month:</label>
                     <select name="month" id="month" class="styled-select">

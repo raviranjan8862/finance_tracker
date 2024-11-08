@@ -1,0 +1,33 @@
+{% load static %}
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div class="navbar">
+            <a href="#" class="logo"><i class="fas fa-chart-line"></i> Finance Tracker</a>
+            <ul class="nav-links">
+                <li><a href="{% url 'dashboard' %}">Home</a></li>
+                <li><a href="{% url 'add_transaction' %}">Add Transaction</a></li>
+                <li><a href="#how-it-works">Reports</a></li>
+                <li><a href="{% url 'transaction_history' %}">Transaction History</a></li> <!-- Assuming you have a support URL -->
+            </ul>
+            <div class="buttons">
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-head"><i class="fas fa-sign-in-alt"></i> Log out</button>
+                </form>
+               
+            </div>
+            
+        </div>
+    </nav>
+    
+</body>
+</html>

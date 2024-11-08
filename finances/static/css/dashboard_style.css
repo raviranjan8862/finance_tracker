@@ -1,5 +1,6 @@
 /* styles.css */
 
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f9;
@@ -8,12 +9,20 @@ body {
     padding: 0;
 }
 
+
+
+/* Dashboard Container */
 .dashboard-container {
-    display: grid; /* Use grid layout */
-    grid-template-columns: 1fr 300px; /* Content on the left, filter on the right */
-    gap: 20px; /* Space between columns */
-    padding: 20px; /* Padding around the dashboard */
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 80px; /* Offset for fixed navbar */
 }
+
+/* Add remaining CSS here (e.g., .filter-container, .card-container, etc.) */
+/* ... */
+
 
 /* Filter card styles */
 .filter-container {
@@ -264,7 +273,9 @@ body {
 .add_transaction {
     display: flex;
     justify-content: center; /* Center horizontally */
-    margin-top: 20px; /* Space above button */
+    margin-top: 20px;
+ 
+    margin-left:20px;
 }
 
 .btn-primary{
@@ -274,11 +285,14 @@ body {
     background-color: #6f9cde;
 }
 .btn-warning {
-    background-color: #ffc107; /* Yellow */
+    background-color: #ffc107;
+    margin-left:20px;
+    
 }
 .btn-history{
     background-color:#b06500;
-    margin-left:15px;
+    margin-left:20px;
+    
 }
 
 .btn-warning:hover {
@@ -291,6 +305,9 @@ body {
 .btn-danger:hover {
     background-color: #c82333; 
 }
+
+
+
 /* Responsive design */
 @media (max-width: 768px) {
     .dashboard-container {

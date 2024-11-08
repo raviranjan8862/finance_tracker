@@ -5,11 +5,47 @@ body {
     background-color: #f4f6f9;
     color: #333;
     margin: 0;
-    padding: 0;
+    padding-top: 10px; /* Adjust for fixed navbar height */
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+}
+
+/* Navbar Styling */
+.sticky-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.navbar .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.navbar .nav-links li a:hover {
+    background-color: #555;
 }
 
 /* Center container */
@@ -18,23 +54,24 @@ body {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    max-width: 450px;
     width: 100%;
     text-align: center;
+    margin-top: 100px; /* Extra space below navbar */
 }
 
 /* Page title */
 .container h2 {
     font-size: 1.8em;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* Form styling */
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Space between form fields */
+    gap: 10px; /* Space between form fields */
 }
 
 /* Input field styling */
@@ -52,8 +89,7 @@ form input:focus, form select:focus, form textarea:focus {
 }
 
 /* Button styling */
-.btn{
-   
+.btn {
     color: #fff;
     padding: 12px;
     font-size: 1.1em;
@@ -63,12 +99,13 @@ form input:focus, form select:focus, form textarea:focus {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
 }
-.btn-success{
-    background-color:#14A44D;
 
+.btn-success {
+    background-color: #14A44D;
 }
-.btn-primary{
-    background-color:#3B71CA;
+
+.btn-primary {
+    background-color: #3B71CA;
 }
 
 .btn-primary:hover {
@@ -79,10 +116,11 @@ form input:focus, form select:focus, form textarea:focus {
 .btn-primary:active {
     transform: translateY(0);
 }
-.btn-secondary{
-    background-color:#9FA6B2;
 
+.btn-secondary {
+    background-color: #9FA6B2;
 }
+
 /* Responsive design */
 @media (max-width: 600px) {
     .container {
@@ -91,5 +129,10 @@ form input:focus, form select:focus, form textarea:focus {
 
     .container h2 {
         font-size: 1.5em;
+    }
+
+    .navbar .nav-links {
+        flex-direction: column;
+        gap: 10px;
     }
 }

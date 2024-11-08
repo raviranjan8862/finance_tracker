@@ -10,5 +10,5 @@ urlpatterns = [
     path('delete-transaction/<int:id>/', views.delete_transaction, name='delete-transaction'),
     path('transaction-history/', views.transaction_history, name='transaction_history'),
     path('set-saving-goal/', views.set_saving_goal, name='set_saving_goal'),
-
+    path('edit-saving-goal/', views.edit_saving_goal, name='edit_saving_goal'),
 ]

@@ -11,11 +11,7 @@
 </head>
 <body>
 
-    <div class="dashboard-button">
-        <a href="{% url 'dashboard' %}" class="btn btn-primary">
-            <i class="fas fa-arrow-left"></i> Dashboard
-        </a>
-    </div>
+    {% include 'finances/navbar.html' %}
     <div class="dashboard-container">
         <div class="content">
                  <!-- Transaction list -->
