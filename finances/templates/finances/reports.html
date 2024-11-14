@@ -16,66 +16,24 @@
     {% include 'finances/navbar.html' %}
 
     <div class="dashboard-container">
-        <div class="content"> <!-- Main content on the left -->
-            <!-- Cards section -->
-          <div class="floor">
-                <div class="card-container">
-                    <div class="card card-income">
-                        <h3>Monthly Income</h3>
-                        <div class="amount">${{ monthly_income }}</div>
-                    </div>
-                    <div class="card card-expenses">
-                        <h3>Monthly Expenses</h3>
-                        <div class="amount">${{ monthly_expenses }}</div>
-                    </div>
-                    <div class="card card-savings-goal">
-                        <h3>Monthly Saving Goal</h3>
-                        <div class="amount">${{ saving_goal.monthly_goal }}</div>
-                    </div>
-                    <div class="card monthly-saving">
-                        <h3>Monthly Saving</h3>
-                        <div class="amount {% if monthly_balance < saving_goal.monthly_goal %}amount-warning{% else %}amount-success{% endif %}">
-                            ${{ monthly_balance }}
-                        </div>
-                    </div>
+
+        <div class="content">
+            <div class="chart">
+                <div class="card" id="income-expense-chart" style="width: 100%; max-width: 700px; height: 400px; margin: auto;"></div>
             </div>
-            
-            <div class="card-container">
-                <div class="card card-income">
-                    <h3>Yearly Income</h3>
-                    <div class="amount">${{ yearly_income }}</div>
-                </div>
-                <div class="card card-expenses">
-                    <h3>Yearly Expenses</h3>
-                    <div class="amount">${{ yearly_expenses }}</div>
-                </div>
-                <div class="card card-savings-goal">
-                    <h3>Yearly Saving Goal</h3>
-                    <div class="amount">${{ saving_goal.yearly_goal }}</div>
-                </div>
-                <div class="card yearly-saving">
-                    <h3>Yearly Saving</h3>
-                    <div class="amount {% if yearly_balance < saving_goal.yearly_goal %}amount-warning{% else %}amount-success{% endif %}">
-                        ${{ yearly_balance }}
-                    </div>
-                </div>
+            <div class="chart">
+                <div id="daily-income-expense-chart" style="width: 100%; max-width: 700px; height: 400px; margin: auto;"></div>
             </div>
+            <div class="chart">
+                <div class="card" id="expense-pie-chart" style="width: 100%; max-width: 500px; height: 400px; margin: auto;"></div>
+                <div class="card" id="income-pie-chart" style="width: 100%; max-width: 500px; height: 400px; margin: auto;"></div>
+            </div>
+
+               
+
         </div>
 
-            <!-- Add Transaction Button section -->
-            <div class="add_transaction">
-                <a href="{% url 'add_transaction' %}" class="btn btn-primary">Add Transaction</a>
-                <a href="{% url 'transaction_history' %}" class="btn btn-history">Transaction History</a>
-                {% if saving_goal %}
-                <!-- If the saving goal exists, show the Edit Saving Goal button -->
-                   <a href="{% url 'edit_saving_goal' %}" class="btn btn-warning">Edit Saving Goal</a>
-                {% else %}
-                <!-- If the saving goal does not exist, show the Set Saving Goal button -->
-                   <a href="{% url 'set_saving_goal' %}" class="btn btn-warning">Set Saving Goal</a>
-                {% endif %}
-                
-            </div>
-        </div>
+        
         
     
         <!-- Filter Section -->
@@ -86,7 +44,7 @@
             </div>
             <div class="filter-form" style="display: none;">
                 <span class="close-button">&times;</span>
-                <form method="get" action="{% url 'dashboard' %}">
+                <form method="get" action="{% url 'reports' %}">
                     <label for="month">Select Month:</label>
                     <select name="month" id="month" class="styled-select">
                         {% for m in month_names %}
@@ -108,16 +66,16 @@
             </div>
         </div>
     </div>
-    <div class="chart">
-    <div class="card" id="income-expense-chart" style="width: 100%; max-width: 700px; height: 400px; margin: auto;"></div>
-    <div class="card" id="expense-pie-chart" style="width: 100%; max-width: 500px; height: 400px; margin: auto;"></div>
-    <div class="card" id="income-pie-chart" style="width: 100%; max-width: 500px; height: 400px; margin: auto;"></div>
-    </div>
-    
+
 
 <!-- Ensure safe JSON encoding -->
 {{ daily_income_data|json_script:"daily-income-data" }}
 {{ daily_expense_data|json_script:"daily-expense-data" }}
+
+
+
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
