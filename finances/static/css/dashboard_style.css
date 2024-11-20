@@ -50,6 +50,58 @@ body {
     display: none; 
     transition: opacity 0.3s ease; 
 }
+.filter-form label {
+    display: block; /* Make labels block elements */
+    margin-bottom: 5px; /* Space below labels */
+    font-weight: bold; /* Bold font for labels */
+    color: #333; /* Dark text color */
+    font-size: 1.1em; /* Slightly larger font size */
+}
+.styled-select {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding for better spacing */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    transition: border 0.3s, background 0.3s; /* Smooth border transition */
+    margin-bottom: 15px; /* Space below select */
+    font-size: 1em; /* Consistent font size */
+}
+.btn-filter {
+    background-color: #007bff; /* Primary button color */
+    color: white; /* Text color */
+    padding: 10px 15px; /* Padding for button */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background color transition */
+    display: block; /* Full width button */
+    width: 100%; /* Full width for button */
+}
+.btn-filter:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+.close-button {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #dc3545; /* Red color for close button */
+    cursor: pointer; /* Pointer cursor */
+    transition: color 0.3s; /* Smooth transition for color */
+}
+close-button:hover {
+    color: #c82333; /* Darker red on hover */
+}
+.filter-button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text color */
+    padding: 12px; /* Padding inside the button */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth background color and transform transition */
+    width: 100%; /* Full width for button */
+    font-size: 1.1em; /* Larger font size for button */
+}
 
 /* Card container styles */
 .card-container {

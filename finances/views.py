@@ -58,10 +58,6 @@ def dashboard(request):
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ]
-
-    
-  
-
     context = {
         'transactions': transactions,
         'monthly_income': monthly_incomes,
