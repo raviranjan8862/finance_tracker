@@ -9,7 +9,7 @@ from datetime import datetime
 from decimal import Decimal
 from .models import Transaction, SavingGoal, Category
 from .forms import TransactionForm, SavingGoalForm
-
+import json
 # finances/views.py
 
 
@@ -204,23 +204,21 @@ def edit_saving_goal(request):
     return render(request, 'finances/edit_saving_goal.html', {'form': form})
 
 
+import json
 from django.shortcuts import render
-from .models import Transaction
-
-
-from django.shortcuts import render
-from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
-from .models import Transaction, SavingGoal
-from decimal import Decimal
 from datetime import datetime
+from decimal import Decimal
+from django.db.models import Sum
+from .models import Transaction, SavingGoal
+
 
 @login_required
 def report_view(request):
     current_month = int(request.GET.get('month', datetime.now().month))
     current_year = int(request.GET.get('year', datetime.now().year))
 
-    # Filter transactions based on the selected month and year
+    # Filter transactions for the current month and year
     transactions = Transaction.objects.filter(
         user=request.user,
         date__year=current_year,
@@ -232,42 +230,34 @@ def report_view(request):
     monthly_expenses = transactions.filter(transaction_type='expense').aggregate(Sum('amount'))['amount__sum'] or 0
     monthly_balance = monthly_incomes - monthly_expenses
 
-    # Calculate yearly income and expenses
-    yearly_transactions = Transaction.objects.filter(
-        user=request.user,
-        date__year=current_year
-    )
-    yearly_income = yearly_transactions.filter(transaction_type='income').aggregate(Sum('amount'))['amount__sum'] or 0
-    yearly_expenses = yearly_transactions.filter(transaction_type='expense').aggregate(Sum('amount'))['amount__sum'] or 0
-    yearly_balance = yearly_income - yearly_expenses
-
     # Retrieve or create a saving goal for the user
-    saving_goal, created = SavingGoal.objects.get_or_create(user=request.user, defaults={
+    saving_goal, _ = SavingGoal.objects.get_or_create(user=request.user, defaults={
         'yearly_goal': Decimal('0.00'),
         'monthly_goal': Decimal('0.00'),
         'current_saving': Decimal('0.00')
     })
 
-    # Calculate remaining balance to be added to savings
-    if monthly_balance > 0:
-        saving_goal.current_saving += monthly_balance
-        saving_goal.save()
-
-    # Calculate data for saving goal donut chart
-    current_saving = saving_goal.current_saving
-    saving_goal_amount = saving_goal.yearly_goal
-    remaining_goal = max(saving_goal_amount - current_saving, Decimal('0.00'))
+    # Calculate monthly saving
+    monthly_saving = monthly_balance if monthly_balance > 0 else 0
 
     # Data for the donut chart
-    saving_goal_donut_data = {
-        'labels': ['Current Saving', 'Remaining Goal'],
-        'values': [float(saving_goal.current_saving), float(saving_goal.yearly_goal - saving_goal.current_saving)]
+    monthly_goal = saving_goal.monthly_goal
+    remaining_goal = max(monthly_goal - monthly_saving, Decimal('0.00'))
+
+    monthly_saving_donut_data = {
+        'labels': ['Monthly Saving', 'Remaining Goal'],
+        'values': [
+            float(monthly_saving),
+            float(remaining_goal)
+        ]
     }
 
+    # Include additional context data for other charts
     category_labels, category_values = get_expense_by_category(request, current_month, current_year)
     monthly_income_data, monthly_expense_data = get_monthly_income_expense_data(request.user, current_year)
     daily_income_data, daily_expense_data = get_daily_income_expense_data(request.user, current_year, current_month)
 
+    # Month names for dropdown or display
     month_names = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -278,11 +268,8 @@ def report_view(request):
         'monthly_income': monthly_incomes,
         'monthly_expenses': monthly_expenses,
         'monthly_balance': monthly_balance,
-        'yearly_income': yearly_income,
-        'yearly_expenses': yearly_expenses,
-        'yearly_balance': yearly_balance,
         'saving_goal': saving_goal,
-        'saving_goal_donut_data': saving_goal_donut_data,  # Add donut chart data
+        'monthly_saving_donut_data': json.dumps(monthly_saving_donut_data),  # Serialized for the template
         'month_names': month_names,
         'current_month': current_month,
         'current_month_name': month_names[current_month - 1],
@@ -296,6 +283,8 @@ def report_view(request):
     }
 
     return render(request, 'finances/reports.html', context)
+
+
 
 
 
@@ -394,6 +383,27 @@ def monthly_income_pie_chart(request, month, year):
         'category_labels': category_labels,
         'category_values': category_values
     })
+
+from django.shortcuts import render
+from django.db.models import Sum
+from .models import SavingGoal, Transaction
+
+def saving_goal_chart(request):
+    # Fetch the user's saving goal and current saving
+    saving_goal = SavingGoal.objects.filter(user=request.user).first()
+    yearly_goal = saving_goal.yearly_goal if saving_goal else 0
+    current_saving = saving_goal.current_saving if saving_goal else 0
+
+    remaining_goal = yearly_goal - current_saving if yearly_goal > current_saving else 0
+
+    # Pass data to the template
+    context = {
+        'current_saving': current_saving,
+        'remaining_goal': remaining_goal,
+        'yearly_goal': yearly_goal,
+    }
+    return render(request, 'your_app/saving_goal_chart.html', context)
+
 
 
 

@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f9;
@@ -13,24 +14,20 @@ nav {
     left: 0;
     width: 100%;
     background-color: #0b0081;
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
-    z-index: 100;
+    padding: 10px 0;
 }
 
 .navbar {
+    width: calc(100% - 120px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
-    background-color: transparent;
-    margin: 0 60px;
-    width: calc(100% - 120px); /* Dynamic width with margin adjustment */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    margin: 0 auto;
+    padding: 10px 20px;
 }
 
 .logo {
@@ -41,14 +38,16 @@ nav {
     align-items: center;
 }
 
-.navbar i {
+.logo i {
     margin-right: 5px;
 }
 
+/* Navigation Links */
 .nav-links {
     display: flex;
-    gap: 34px;
-    margin: 0 50px 0 auto;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
 }
 
 .nav-links li {
@@ -66,28 +65,20 @@ nav {
     color: orangered;
 }
 
-.menu-toggle {
-    display: none; /* Hidden by default; shown in mobile view */
-    justify-content: center;
+/* Buttons */
+.buttons {
+    display: flex;
     align-items: center;
-    width: 40px;
-    height: 40px;
-    color: #fff;
-    cursor: pointer;
-}
-
-.menu-toggle i {
-    font-size: 20px;
 }
 
 .btn-head {
-    margin: 6px;
-    padding: 8px;
+    margin-left: 10px;
+    padding: 8px 12px;
     color: #fff;
-    font-size: 16px;
-    text-decoration: none;
+    background-color: transparent;
     border: 1px solid #fff;
-    border-radius: 2px;
+    border-radius: 4px;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
@@ -95,28 +86,40 @@ nav {
     background-color: #6f9cde;
 }
 
-/* Responsive Navbar */
+/* Hamburger Menu for Mobile */
+.menu-toggle {
+    display: none; /* Hidden by default */
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
 @media only screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        align-items: flex-start;
-        padding: 16px;
         width: 100%;
-        margin: 0;
-    }
-
-    .logo {
-        margin-bottom: 16px;
+        padding: 10px;
     }
 
     .nav-links {
         flex-direction: column;
-        gap: 10px;
-        margin: 0;
+        gap: 15px;
+        margin: 20px 0;
+        display: none; /* Hidden by default */
+    }
+
+    .nav-links.active {
+        display: flex;
     }
 
     .menu-toggle {
-        display: flex;
-        margin-left: auto;
+        display: block; /* Show hamburger menu on smaller screens */
+    }
+
+    .buttons {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: flex-start;
     }
 }

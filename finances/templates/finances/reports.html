@@ -28,6 +28,11 @@
                 <div class="card" id="expense-pie-chart" style="width: 100%; max-width: 500px; height: 400px; margin: auto;"></div>
                 <div class="card" id="income-pie-chart" style="width: 100%; max-width: 500px; height: 400px; margin: auto;"></div>
             </div>
+            <div class="chart">
+                <div id="monthly-saving-donut-chart" style="width: 100%; max-width: 500px; height: 400px; margin: auto;"></div>
+            </div>
+            
+
 
                
 
@@ -66,6 +71,7 @@
             </div>
         </div>
     </div>
+    {% include 'finances/footer.html' %}
 
 
 <!-- Ensure safe JSON encoding -->
@@ -74,6 +80,25 @@
 
 
 
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Parse the donut chart data from the context
+        const monthlySavingData = JSON.parse('{{ monthly_saving_donut_data|safe }}');
+        
+        // Render the donut chart using Plotly
+        Plotly.newPlot('monthly-saving-donut-chart', [{
+            type: 'pie',
+            labels: monthlySavingData.labels,
+            values: monthlySavingData.values,
+            textinfo: 'label+percent',
+            insidetextorientation: 'radial'
+        }], {
+            title: 'Monthly Saving vs. Monthly Goal'
+        });
+    });
+</script>
 
 
 

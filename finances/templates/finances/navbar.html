@@ -6,28 +6,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-    <title>Document</title>
+    <title>Responsive Navbar</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav>
         <div class="navbar">
-            <a href="{% url 'dashboard' %}" class="logo"><i class="fas fa-chart-line"></i> Finance Tracker</a>
+            <!-- Logo -->
+            <a href="{% url 'dashboard' %}" class="logo">
+                <i class="fas fa-chart-line"></i> FinTrack
+            </a>
+
+            <!-- Hamburger Menu -->
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <!-- Navigation Links -->
             <ul class="nav-links">
                 <li><a href="{% url 'dashboard' %}">Home</a></li>
                 <li><a href="{% url 'add_transaction' %}">Add Transaction</a></li>
                 <li><a href="{% url 'reports' %}">Reports</a></li>
-                <li><a href="{% url 'transaction_history' %}">Transaction History</a></li> <!-- Assuming you have a support URL -->
+                <li><a href="{% url 'transaction_history' %}">Transaction History</a></li>
             </ul>
+
+            <!-- Logout Button -->
             <div class="buttons">
                 <form action="{% url 'logout' %}" method="post" style="display: inline;">
                     {% csrf_token %}
-                    <button type="submit" class="btn-head"><i class="fas fa-sign-in-alt"></i> Log out</button>
+                    <button type="submit" class="btn-head">
+                        <i class="fas fa-sign-in-alt"></i> Log out
+                    </button>
                 </form>
-               
             </div>
-            
         </div>
     </nav>
-    
+
+    <script>
+        // Toggle the navigation menu on small screens
+        document.querySelector('.menu-toggle').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

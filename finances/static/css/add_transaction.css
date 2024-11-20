@@ -10,43 +10,9 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    flex-direction: column; /* Center vertically and horizontally */
 }
 
-/* Navbar Styling */
-.sticky-navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-}
-
-.navbar .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
-}
-
-.navbar .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-}
-
-.navbar .nav-links li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-}
-
-.navbar .nav-links li a:hover {
-    background-color: #555;
-}
 
 /* Center container */
 .container {
@@ -122,17 +88,53 @@ form input:focus, form select:focus, form textarea:focus {
 }
 
 /* Responsive design */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .container {
         padding: 20px;
+        max-width: 80%; /* Allow the container to take up more width on tablets */
     }
 
     .container h2 {
-        font-size: 1.5em;
+        font-size: 1.6em;
     }
 
+    /* Stack navbar links on smaller screens */
     .navbar .nav-links {
         flex-direction: column;
         gap: 10px;
+        align-items: center; /* Center navbar items */
+    }
+
+    /* Adjust button padding and font size for smaller screens */
+    .btn {
+        padding: 10px;
+        font-size: 1em;
+    }
+}
+
+/* For mobile screens */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+        max-width: 95%; /* Take up almost full width on mobile */
+    }
+
+    .container h2 {
+        font-size: 1.4em;
+    }
+
+    /* Further adjust navbar on mobile */
+    .navbar .nav-links {
+        flex-direction: column;
+        align-items: center; /* Center navbar items */
+    }
+
+    .navbar .nav-links li a {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 15px; /* Adjust button size on mobile */
+        font-size: 1em;
     }
 }
